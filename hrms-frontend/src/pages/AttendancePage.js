@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../App.css";
 
-const API = "http://127.0.0.1:8000/api";
+const API = (process.env.REACT_APP_API_URL || "http://127.0.0.1:8000/api").replace(/\/$/, "");
 
 export default function AttendancePage() {
   const [employees, setEmployees] = useState([]);
@@ -19,15 +19,15 @@ export default function AttendancePage() {
   };
 
   const loadAttendance = async (empId) => {
-  const res = await fetch(`${API}/attendance/`);
-  const data = await res.json();
+    const res = await fetch(`${API}/attendance/`);
+    const data = await res.json();
 
-  const filtered = data.filter(
-    (record) => record.employee_id === Number(empId)
-  );
+    const filtered = data.filter(
+      (record) => record.employee_id === Number(empId)
+    );
 
-  setAttendance(filtered);
-};
+    setAttendance(filtered);
+  };
 
 
   const handleEmployeeChange = (e) => {

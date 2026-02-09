@@ -5,7 +5,8 @@ import {
 } from 'recharts';
 import { LayoutDashboard, Users, Calendar, Settings, LogOut, Bell, Plus, AlertCircle, CheckCircle2 } from 'lucide-react';
 
-const API = process.env.REACT_APP_API_URL || "http://127.0.0.1:8000/api";
+const API = (process.env.REACT_APP_API_URL || "http://127.0.0.1:8000/api").replace(/\/$/, "");
+console.log("HRMS Connected to API:", API);
 
 export default function Dashboard() {
   const [employees, setEmployees] = useState([]);
