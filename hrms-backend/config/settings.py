@@ -88,10 +88,17 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'mongodb': {
+        'ENGINE': 'django_mongodb_backend',
+        'NAME': os.getenv('DB_NAME', 'HRMS_DB'),
+        'HOST': os.getenv('DATABASE_URL'),
     }
 }
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DATABASE_ROUTERS = ['config.db_router.MongoDBRouter']
+
+DEFAULT_AUTO_FIELD = 'django_mongodb_backend.fields.ObjectIdAutoField'
 
 
 # Password validation
